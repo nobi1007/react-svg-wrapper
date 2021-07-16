@@ -15,14 +15,13 @@
           </li>
           <li>
             For, full logic of the component chekout 
-            <a href="https://github.com/nobi1007/react-components/blob/main/svg-wrapper-generator/src/component/SVGWrapper/SVGWrapper.js">
+            <a href="https://github.com/nobi1007/react-svg-wrapper/blob/main/src/SVGWrapper/index.js">
               here
             </a>
             .
           </li>
           <li>
-            And, do :star: and :fork_and_knife: the repo if it was <u>fantastic</u> :) and let me know
-            about your thoughts and bugs in <a href="https://github.com/nobi1007/react-components/issues/2">Issues </a> section.
+            And, do :star: and :fork_and_knife: the repo if it was <u>fantastic</u> :)
           </li>
         </ol>
       </section>
