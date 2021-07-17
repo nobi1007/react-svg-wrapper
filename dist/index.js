@@ -5,17 +5,17 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports["default"] = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
@@ -210,7 +210,7 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
         domObject: rootObject,
         RootComponent: rootNodeIndex !== -1 ? function (props) {
           return getWrapperComponent(rootObject, props);
-        } : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Invalid SVG File")
+        } : /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, "Invalid SVG File")
       });
     }
   }, {
@@ -259,7 +259,7 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       var allProps = _objectSpread({}, this.props);
 
       delete allProps.src;
-      return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, Object.values(domObject).length > 0 && /*#__PURE__*/_react.default.createElement(RootComponent, allProps));
+      return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, Object.values(domObject).length > 0 && /*#__PURE__*/_react["default"].createElement(RootComponent, allProps));
     }
   }]);
 
@@ -270,8 +270,8 @@ SVGWrapper.defaultProps = {
   type: "file"
 };
 SVGWrapper.propTypes = {
-  src: _propTypes.default.string.isRequired,
-  type: _propTypes.default.string
+  src: _propTypes["default"].string.isRequired,
+  type: _propTypes["default"].string
 };
 
 function removeNewlineCharacters(inpString) {
@@ -294,22 +294,22 @@ function getWrapperComponent(rootNode, parentProps) {
   var NodeName = rootNode.nodeName;
 
   if (NodeName === "#text") {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, {
+    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, {
       key: rootNode.key
     }, rootNodeValue);
   }
 
   if (NodeName === "#comment") {
-    return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null);
+    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null);
   }
 
   var NodeComponent = function NodeComponent(props) {
-    return /*#__PURE__*/_react.default.createElement(NodeName, props, props.children);
+    return /*#__PURE__*/_react["default"].createElement(NodeName, props, props.children);
   }; // const NodeComponent = getCompByName(nodeName);
 
 
   if (rootNode.childNodes.length === 0) {
-    return /*#__PURE__*/_react.default.createElement(NodeComponent, _extends({}, nodeAttributes, {
+    return /*#__PURE__*/_react["default"].createElement(NodeComponent, _extends({}, nodeAttributes, {
       key: rootNode.key
     }));
   } else {
@@ -318,14 +318,14 @@ function getWrapperComponent(rootNode, parentProps) {
       var EachChildComp = getWrapperComponent(eachChild, {});
       SiblingComponents.push(EachChildComp);
     });
-    return /*#__PURE__*/_react.default.createElement(NodeComponent, _extends({}, nodeAttributes, parentProps, {
+    return /*#__PURE__*/_react["default"].createElement(NodeComponent, _extends({}, nodeAttributes, parentProps, {
       key: rootNode.key
     }), SiblingComponents);
   }
 }
 
 var _default = SVGWrapper;
-exports.default = _default;
+exports["default"] = _default;
 var attributeNameMapping = {
   // HTML
   accept: "accept",
@@ -351,7 +351,7 @@ var attributeNameMapping = {
   checked: "checked",
   children: "children",
   cite: "cite",
-  class: "className",
+  "class": "className",
   classid: "classID",
   classname: "className",
   cols: "cols",
@@ -366,7 +366,7 @@ var attributeNameMapping = {
   dangerouslysetinnerhtml: "dangerouslySetInnerHTML",
   data: "data",
   datetime: "dateTime",
-  default: "default",
+  "default": "default",
   defaultchecked: "defaultChecked",
   defaultvalue: "defaultValue",
   defer: "defer",
@@ -375,7 +375,7 @@ var attributeNameMapping = {
   download: "download",
   draggable: "draggable",
   enctype: "encType",
-  for: "htmlFor",
+  "for": "htmlFor",
   form: "form",
   formmethod: "formMethod",
   formaction: "formAction",
@@ -592,7 +592,7 @@ var attributeNameMapping = {
   imagerendering: "imageRendering",
   "image-rendering": "imageRendering",
   in2: "in2",
-  in: "in",
+  "in": "in",
   inlist: "inlist",
   intercept: "intercept",
   k1: "k1",
@@ -732,7 +732,7 @@ var attributeNameMapping = {
   "text-rendering": "textRendering",
   to: "to",
   transform: "transform",
-  typeof: "typeof",
+  "typeof": "typeof",
   u1: "u1",
   u2: "u2",
   underlineposition: "underlinePosition",

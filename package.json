@@ -1,11 +1,24 @@
 {
     "name": "react-svg-wrapper",
-    "version": "0.3.0",
+    "version": "1.0.0",
     "main": "dist/index.js",
     "peerDependencies": {
         "react": "^17.0.2"
     },
+    "author": "Shyam Mittal <mittalshyam1007@gmail.com> (https://www.linkedin.com/in/shyam-mittal-1007/)",
     "scripts": {
         "pack": "rm -rf dist && ./node_modules/.bin/babel ./src/SVGWrapper/index.js -d dist"
-    }
+    },
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nobi1007/react-svg-wrappert"
+    },
+    "keywords": [
+        "svg-wrapper",
+        "react-svg",
+        "react-svg-wrapper",
+        "svg",
+        "svg-converter"
+    ]
 }
