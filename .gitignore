@@ -27,3 +27,4 @@ src/index.js
 src/index.css
 package-lock.json
 **/public/
+test.package.json

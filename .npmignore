@@ -1,2 +1,5 @@
 src
 package.json
+public
+babel.config.js
+test.package.json
