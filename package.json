@@ -1,9 +1,12 @@
 {
     "name": "react-svg-wrapper",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "main": "dist/index.js",
     "peerDependencies": {
         "react": "^17.0.2"
+    },
+    "dependencies": {
+        "prop-types": "^15.7.2"
     },
     "author": "Shyam Mittal <mittalshyam1007@gmail.com> (https://www.linkedin.com/in/shyam-mittal-1007/)",
     "scripts": {
