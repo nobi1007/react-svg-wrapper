@@ -1,6 +1,6 @@
 {
     "name": "react-svg-wrapper",
-    "version": "0.5.4",
+    "version": "0.5.5",
     "main": "dist/index.js",
     "peerDependencies": {
         "react": "^17.0.2"
@@ -35,5 +35,10 @@
         "@testing-library/user-event": "^12.8.3",
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-react": "^6.24.1"
-    }
+    },
+    "files": [
+        "package.json",
+        "README.md",
+        "dist/index.js"
+    ]
 }
