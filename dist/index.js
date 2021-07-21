@@ -57,6 +57,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+/** Regex exp. for checking if the string is purely a number or not.
+ * @readonly
+ * @constant
+ */
 var isNumberRegex = /^-?[0-9]+\.?[0-9]*$/;
 
 var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
@@ -75,11 +79,18 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       wrapperCompObject: {},
       domObject: {},
       RootComponent: null
-    }; // for providing unique key to each element
+    };
+    /** Providing a non-clashing key to each component of our new component tree. */
 
     _this.randomKey = -1;
     return _this;
   }
+  /** Converts a kebab-cased string into a camelCased string
+   * @function
+   * @param {string} `kebab` - A string which is kebab-cased.
+   * @returns {string} `camelCasedString`
+   */
+
 
   _createClass(SVGWrapper, [{
     key: "kebabToCamel",
@@ -99,6 +110,14 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       });
       return camel;
     }
+    /** Converts an inline style string into an inline style object for react.
+     * @function
+     * @param {String} style - A style string.
+     * @example
+     * // returns {display:'flex', flexDirection:'row',backgroundColor:'#000'}
+     * transformStyleString("display:flex; flex-direction:row; background-color:#000");
+     */
+
   }, {
     key: "transformStyleString",
     value: function transformStyleString() {
@@ -132,6 +151,10 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       });
       return transformedAttrs;
     }
+    /** Returns an adjacency list of all the relevant nodes of the svg component tree wrt passed root node.
+     * @function
+     */
+
   }, {
     key: "computeSubTrees",
     value: function computeSubTrees(rootNode) {
@@ -141,13 +164,19 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       var attributes = (rootNode === null || rootNode === void 0 ? void 0 : rootNode.attributes) || {};
       var attributeNames = Object.keys(attributes);
       var validAttributeNames = [];
-      attributeNames.forEach(function (eachAttributeName, inx) {
+      var actualAttributes = {};
+      var actualChildNodes = [];
+      /** Retrieving all attributes for a particular tag */
+
+      attributeNames.forEach(function (eachAttributeName) {
         if (parseInt(eachAttributeName) || eachAttributeName === "0") {
           validAttributeNames.push(eachAttributeName);
         }
       });
-      var actualAttributes = {};
-      validAttributeNames.forEach(function (eachAttributeName, inx) {
+      /** - For each valid attribute and their value we create a object.
+       * - If attribute is a `style` we *properly* format and convert it into an object */
+
+      validAttributeNames.forEach(function (eachAttributeName) {
         var eachAttributeNameExists = attributeNameMapping[attributes[eachAttributeName].nodeName];
 
         if (eachAttributeNameExists) {
@@ -160,18 +189,25 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
           actualAttributes[eachAttributeNameExists] = attrValue;
         }
       });
-      var actualChildNodes = [];
+      /** Finding relevant child nodes and pushing it into an array for further running of DFS. */
+
       rootNode.childNodes.forEach(function (eachChild) {
         var _eachChild$nodeValue;
 
-        // for ignoring dom objects been created beacuse of space or newline characters
+        /**  For ignoring dom objects been created beacuse of space or newline characters */
         var nodeValue = eachChild === null || eachChild === void 0 ? void 0 : (_eachChild$nodeValue = eachChild.nodeValue) === null || _eachChild$nodeValue === void 0 ? void 0 : _eachChild$nodeValue.trim();
 
         if (eachChild.nodeName === "#text" && nodeValue && eachChild.nodeName !== "#comment" || eachChild.nodeName !== "#text" && eachChild.nodeName !== "#comment") {
           actualChildNodes.push(eachChild);
         }
       });
+      /** Providing a non-clashing key to each component of our new component tree. */
+
       this.randomKey += 1;
+      /** Instantiating an object for each rootNode.
+       * @constant
+       */
+
       var nodeObject = {
         key: this.randomKey,
         nodeName: nodeName,
@@ -181,8 +217,11 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       };
 
       if (actualChildNodes.length === 0) {
+        /**  Returns nodeObject is the `rootNode` is a leaf.*/
         return nodeObject;
       } else {
+        /**  For each non-leaf node recursively explore each child node and populate
+         * the `actualChildNodes` and finally return the adjacency list.*/
         actualChildNodes.forEach(function (eachChild, inx) {
           var currentChildNode = _objectSpread({}, _this3.computeSubTrees(eachChild));
 
@@ -192,11 +231,16 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
         return nodeObject;
       }
     }
+    /** Parses the svg in top-down approach and constructs a react component for injection.
+     * @function
+     */
+
   }, {
     key: "performConversion",
     value: function performConversion() {
       var wrapperCompObject = this.state.wrapperCompObject;
       var rootNodeIndex = -1;
+      /** Check if the file contains a valid parsable content or not. */
 
       for (var inx = 0; inx < wrapperCompObject.childNodes.length; inx++) {
         if (wrapperCompObject.childNodes[inx].nodeName !== "#comment") {
@@ -204,6 +248,10 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
           break;
         }
       }
+      /** Adjacency list of all nodes of svg.
+       * @constant
+       */
+
 
       var rootObject = this.computeSubTrees(wrapperCompObject.childNodes[0]);
       this.setState({
@@ -213,6 +261,10 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
         } : /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, "Invalid SVG File")
       });
     }
+    /** As the component mounts we, based on the props, trigger the `performConversion` function.
+     * @function
+     */
+
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
@@ -254,7 +306,8 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
     value: function render() {
       var _this$state = this.state,
           RootComponent = _this$state.RootComponent,
-          domObject = _this$state.domObject; // passing all props to root component instead of that src props.
+          domObject = _this$state.domObject;
+      /** Passing all props to root component instead of that src props. */
 
       var allProps = _objectSpread({}, this.props);
 
@@ -273,6 +326,9 @@ SVGWrapper.propTypes = {
   src: _propTypes["default"].string.isRequired,
   type: _propTypes["default"].string
 };
+/** Removes all new line, non-text chars from a string.
+ * @function
+ */
 
 function removeNewlineCharacters(inpString) {
   var tempString = "";
@@ -284,6 +340,10 @@ function removeNewlineCharacters(inpString) {
   });
   return tempString;
 }
+/** Parses the adjacency list starting from root node and creates a React component tree from the list.
+ * @function
+ */
+
 
 function getWrapperComponent(rootNode, parentProps) {
   var _rootNode$nodeValue;
@@ -292,27 +352,37 @@ function getWrapperComponent(rootNode, parentProps) {
 
   var rootNodeValue = rootNode === null || rootNode === void 0 ? void 0 : (_rootNode$nodeValue = rootNode.nodeValue) === null || _rootNode$nodeValue === void 0 ? void 0 : _rootNode$nodeValue.trim();
   var NodeName = rootNode.nodeName;
+  /** If a node contains just a text, then enclose it with a fragment and retur. */
 
   if (NodeName === "#text") {
     return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, {
       key: rootNode.key
     }, rootNodeValue);
   }
+  /** We ignore comments */
+
 
   if (NodeName === "#comment") {
     return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null);
   }
+  /** For each node, create a component from its nodeName and pass all its props.
+   * @function
+   */
+
 
   var NodeComponent = function NodeComponent(props) {
     return /*#__PURE__*/_react["default"].createElement(NodeName, props, props.children);
-  }; // const NodeComponent = getCompByName(nodeName);
-
+  };
 
   if (rootNode.childNodes.length === 0) {
+    /** For leaf nodes we return the component back to parent. */
     return /*#__PURE__*/_react["default"].createElement(NodeComponent, _extends({}, nodeAttributes, {
       key: rootNode.key
     }));
   } else {
+    /** For non-leaf nodes we recursively create the child components and
+     * then attach them to their parent and then finally
+     * return the root of the component tree */
     var SiblingComponents = [];
     rootNode.childNodes.forEach(function (eachChild, inx) {
       var EachChildComp = getWrapperComponent(eachChild, {});
@@ -325,6 +395,11 @@ function getWrapperComponent(rootNode, parentProps) {
 }
 
 var _default = SVGWrapper;
+/** All valid html/svg attributes.
+ *  @constant
+ * @readonly
+ */
+
 exports["default"] = _default;
 var attributeNameMapping = {
   // HTML
