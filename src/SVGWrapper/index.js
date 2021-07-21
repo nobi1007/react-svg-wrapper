@@ -1,6 +1,10 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
+/** Regex exp. for checking if the string is purely a number or not.
+ * @readonly
+ * @constant
+ */
 const isNumberRegex = /^-?[0-9]+\.?[0-9]*$/;
 
 class SVGWrapper extends PureComponent {
@@ -12,10 +16,16 @@ class SVGWrapper extends PureComponent {
             domObject: {},
             RootComponent: null,
         };
-        // for providing unique key to each element
+
+        /** Providing a non-clashing key to each component of our new component tree. */
         this.randomKey = -1;
     }
 
+    /** Converts a kebab-cased string into a camelCased string
+     * @function
+     * @param {string} `kebab` - A string which is kebab-cased.
+     * @returns {string} `camelCasedString`
+     */
     kebabToCamel(kebab) {
         const temp = kebab?.split("-");
         let camel = "";
@@ -32,6 +42,13 @@ class SVGWrapper extends PureComponent {
         return camel;
     }
 
+    /** Converts an inline style string into an inline style object for react.
+     * @function
+     * @param {String} style - A style string.
+     * @example
+     * // returns {display:'flex', flexDirection:'row',backgroundColor:'#000'}
+     * transformStyleString("display:flex; flex-direction:row; background-color:#000");
+     */
     transformStyleString(style = "") {
         const attrs = style.trim().split(";");
         const styleAttrs = [];
@@ -54,18 +71,27 @@ class SVGWrapper extends PureComponent {
         return transformedAttrs;
     }
 
+    /** Returns an adjacency list of all the relevant nodes of the svg component tree wrt passed root node.
+     * @function
+     */
     computeSubTrees(rootNode) {
         const nodeName = rootNode?.nodeName;
         const attributes = rootNode?.attributes || {};
-        let attributeNames = Object.keys(attributes);
-        let validAttributeNames = [];
-        attributeNames.forEach((eachAttributeName, inx) => {
+        const attributeNames = Object.keys(attributes);
+        const validAttributeNames = [];
+        const actualAttributes = {};
+        const actualChildNodes = [];
+
+        /** Retrieving all attributes for a particular tag */
+        attributeNames.forEach((eachAttributeName) => {
             if (parseInt(eachAttributeName) || eachAttributeName === "0") {
                 validAttributeNames.push(eachAttributeName);
             }
         });
-        let actualAttributes = {};
-        validAttributeNames.forEach((eachAttributeName, inx) => {
+
+        /** - For each valid attribute and their value we create a object.
+         * - If attribute is a `style` we *properly* format and convert it into an object */
+        validAttributeNames.forEach((eachAttributeName) => {
             const eachAttributeNameExists =
                 attributeNameMapping[attributes[eachAttributeName].nodeName];
             if (eachAttributeNameExists) {
@@ -76,10 +102,10 @@ class SVGWrapper extends PureComponent {
                 actualAttributes[eachAttributeNameExists] = attrValue;
             }
         });
-        let actualChildNodes = [];
 
+        /** Finding relevant child nodes and pushing it into an array for further running of DFS. */
         rootNode.childNodes.forEach((eachChild) => {
-            // for ignoring dom objects been created beacuse of space or newline characters
+            /**  For ignoring dom objects been created beacuse of space or newline characters */
             const nodeValue = eachChild?.nodeValue?.trim();
             if (
                 (eachChild.nodeName === "#text" &&
@@ -91,17 +117,27 @@ class SVGWrapper extends PureComponent {
                 actualChildNodes.push(eachChild);
             }
         });
+
+        /** Providing a non-clashing key to each component of our new component tree. */
         this.randomKey += 1;
-        let nodeObject = {
+
+        /** Instantiating an object for each rootNode.
+         * @constant
+         */
+        const nodeObject = {
             key: this.randomKey,
             nodeName: nodeName,
             attributes: actualAttributes,
             childNodes: [],
             nodeValue: rootNode?.nodeValue,
         };
+
         if (actualChildNodes.length === 0) {
+            /**  Returns nodeObject is the `rootNode` is a leaf.*/
             return nodeObject;
         } else {
+            /**  For each non-leaf node recursively explore each child node and populate
+             * the `actualChildNodes` and finally return the adjacency list.*/
             actualChildNodes.forEach((eachChild, inx) => {
                 const currentChildNode = { ...this.computeSubTrees(eachChild) };
                 actualChildNodes[inx] = { ...currentChildNode };
@@ -112,9 +148,14 @@ class SVGWrapper extends PureComponent {
         }
     }
 
+    /** Parses the svg in top-down approach and constructs a react component for injection.
+     * @function
+     */
     performConversion() {
         const { wrapperCompObject } = this.state;
         let rootNodeIndex = -1;
+
+        /** Check if the file contains a valid parsable content or not. */
         for (let inx = 0; inx < wrapperCompObject.childNodes.length; inx++) {
             if (wrapperCompObject.childNodes[inx].nodeName !== "#comment") {
                 rootNodeIndex = inx;
@@ -122,9 +163,13 @@ class SVGWrapper extends PureComponent {
             }
         }
 
+        /** Adjacency list of all nodes of svg.
+         * @constant
+         */
         const rootObject = this.computeSubTrees(
             wrapperCompObject.childNodes[0]
         );
+
         this.setState({
             domObject: rootObject,
             RootComponent:
@@ -138,6 +183,9 @@ class SVGWrapper extends PureComponent {
         });
     }
 
+    /** As the component mounts we, based on the props, trigger the `performConversion` function.
+     * @function
+     */
     componentDidMount() {
         const { src, type } = this.props;
         if (type === "file") {
@@ -184,8 +232,8 @@ class SVGWrapper extends PureComponent {
     render() {
         const { RootComponent, domObject } = this.state;
 
-        // passing all props to root component instead of that src props.
-        let allProps = { ...this.props };
+        /** Passing all props to root component instead of that src props. */
+        const allProps = { ...this.props };
         delete allProps.src;
 
         return (
@@ -207,6 +255,9 @@ SVGWrapper.propTypes = {
     type: PropTypes.string,
 };
 
+/** Removes all new line, non-text chars from a string.
+ * @function
+ */
 function removeNewlineCharacters(inpString) {
     let tempString = "";
     const noSpaceList = inpString.split(/\r?\n|\r/g);
@@ -218,26 +269,40 @@ function removeNewlineCharacters(inpString) {
     return tempString;
 }
 
+/** Parses the adjacency list starting from root node and creates a React component tree from the list.
+ * @function
+ */
 function getWrapperComponent(rootNode, parentProps) {
     const nodeAttributes = { ...rootNode.attributes };
     const rootNodeValue = rootNode?.nodeValue?.trim();
     const NodeName = rootNode.nodeName;
+
+    /** If a node contains just a text, then enclose it with a fragment and retur. */
     if (NodeName === "#text") {
         return (
             <React.Fragment key={rootNode.key}>{rootNodeValue}</React.Fragment>
         );
     }
+
+    /** We ignore comments */
     if (NodeName === "#comment") {
         return <></>;
     }
+
+    /** For each node, create a component from its nodeName and pass all its props.
+     * @function
+     */
     const NodeComponent = (props) => (
         <NodeName {...props}>{props.children}</NodeName>
     );
-    // const NodeComponent = getCompByName(nodeName);
 
     if (rootNode.childNodes.length === 0) {
+        /** For leaf nodes we return the component back to parent. */
         return <NodeComponent {...nodeAttributes} key={rootNode.key} />;
     } else {
+        /** For non-leaf nodes we recursively create the child components and
+         * then attach them to their parent and then finally
+         * return the root of the component tree */
         const SiblingComponents = [];
         rootNode.childNodes.forEach((eachChild, inx) => {
             const EachChildComp = getWrapperComponent(eachChild, {});
@@ -257,6 +322,10 @@ function getWrapperComponent(rootNode, parentProps) {
 
 export default SVGWrapper;
 
+/** All valid html/svg attributes.
+ *  @constant
+ * @readonly
+ */
 const attributeNameMapping = {
     // HTML
     accept: "accept",
