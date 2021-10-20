@@ -28,7 +28,7 @@ const MyComp = () => {
     // some wrapper/parent component if needed
     <someComp>
       <SVGWrapper
-        src={svg}
+        src={myLogo}
         className="App-logo"
         style={{
           backgroundColor: "red",
