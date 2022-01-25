@@ -1,75 +1,327 @@
 "use strict";
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj &&
+        typeof Symbol === "function" &&
+        obj.constructor === Symbol &&
+        obj !== Symbol.prototype
+        ? "symbol"
+        : typeof obj;
+    };
+  }
+  return _typeof(obj);
+}
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+  value: true,
 });
-exports["default"] = void 0;
+exports.default = void 0;
 
-var _react = _interopRequireWildcard(require("react"));
+const _react = _interopRequireWildcard(require("react"));
 
-var _propTypes = _interopRequireDefault(require("prop-types"));
+const _propTypes = _interopRequireDefault(require("prop-types"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _getRequireWildcardCache(nodeInterop) {
+  if (typeof WeakMap !== "function") return null;
+  const cacheBabelInterop = new WeakMap();
+  const cacheNodeInterop = new WeakMap();
+  return (_getRequireWildcardCache = function _getRequireWildcardCache(
+    nodeInterop
+  ) {
+    return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
+  })(nodeInterop);
+}
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) {
+  if (!nodeInterop && obj && obj.__esModule) {
+    return obj;
+  }
+  if (
+    obj === null ||
+    (_typeof(obj) !== "object" && typeof obj !== "function")
+  ) {
+    return { default: obj };
+  }
+  const cache = _getRequireWildcardCache(nodeInterop);
+  if (cache && cache.has(obj)) {
+    return cache.get(obj);
+  }
+  const newObj = {};
+  const hasPropertyDescriptor =
+    Object.defineProperty && Object.getOwnPropertyDescriptor;
+  for (const key in obj) {
+    if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
+      const desc = hasPropertyDescriptor
+        ? Object.getOwnPropertyDescriptor(obj, key)
+        : null;
+      if (desc && (desc.get || desc.set)) {
+        Object.defineProperty(newObj, key, desc);
+      } else {
+        newObj[key] = obj[key];
+      }
+    }
+  }
+  newObj.default = obj;
+  if (cache) {
+    cache.set(obj, newObj);
+  }
+  return newObj;
+}
 
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() {
+  _extends =
+    Object.assign ||
+    function (target) {
+      for (let i = 1; i < arguments.length; i++) {
+        const source = arguments[i];
+        for (const key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    };
+  return _extends.apply(this, arguments);
+}
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) {
+  const keys = Object.keys(object);
+  if (Object.getOwnPropertySymbols) {
+    let symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+    keys.push.apply(keys, symbols);
+  }
+  return keys;
+}
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) {
+  for (let i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(
+          target,
+          key,
+          Object.getOwnPropertyDescriptor(source, key)
+        );
+      });
+    }
+  }
+  return target;
+}
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true,
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
 
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+function _slicedToArray(arr, i) {
+  return (
+    _arrayWithHoles(arr) ||
+    _iterableToArrayLimit(arr, i) ||
+    _unsupportedIterableToArray(arr, i) ||
+    _nonIterableRest()
+  );
+}
 
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _nonIterableRest() {
+  throw new TypeError(
+    "Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."
+  );
+}
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  let n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) {
+    return _arrayLikeToArray(o, minLen);
+  }
+}
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
 
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+function _iterableToArrayLimit(arr, i) {
+  let _i =
+    arr == null
+      ? null
+      : (typeof Symbol !== "undefined" && arr[Symbol.iterator]) ||
+        arr["@@iterator"];
+  if (_i == null) return;
+  const _arr = [];
+  let _n = true;
+  let _d = false;
+  let _s, _e;
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i.return != null) _i.return();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+  return _arr;
+}
 
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) {
+  for (let i = 0; i < props.length; i++) {
+    const descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: { value: subClass, writable: true, configurable: true },
+  });
+  if (superClass) _setPrototypeOf(subClass, superClass);
+}
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf =
+    Object.setPrototypeOf ||
+    function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+  return _setPrototypeOf(o, p);
+}
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) {
+  const hasNativeReflectConstruct = _isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    const Super = _getPrototypeOf(Derived);
+    let result;
+    if (hasNativeReflectConstruct) {
+      const NewTarget = _getPrototypeOf(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return _possibleConstructorReturn(this, result);
+  };
+}
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+  return _assertThisInitialized(self);
+}
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError(
+      "this hasn't been initialised - super() hasn't been called"
+    );
+  }
+  return self;
+}
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(
+      Reflect.construct(Boolean, [], function () {})
+    );
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf
+    ? Object.getPrototypeOf
+    : function _getPrototypeOf(o) {
+        return o.__proto__ || Object.getPrototypeOf(o);
+      };
+  return _getPrototypeOf(o);
+}
 
 /** Regex exp. for checking if the string is purely a number or not.
  * @readonly
  * @constant
  */
-var isNumberRegex = /^-?[0-9]+\.?[0-9]*$/;
+const isNumberRegex = /^-?[0-9]+\.?[0-9]*$/;
 
-var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
+const SVGWrapper = /* #__PURE__ */ (function (_PureComponent) {
   _inherits(SVGWrapper, _PureComponent);
 
-  var _super = _createSuper(SVGWrapper);
+  const _super = _createSuper(SVGWrapper);
 
   function SVGWrapper(props) {
-    var _this;
+    let _this;
 
     _classCallCheck(this, SVGWrapper);
 
@@ -78,7 +330,7 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
       fileData: "",
       wrapperCompObject: {},
       domObject: {},
-      RootComponent: null
+      RootComponent: null,
     };
     /** Providing a non-clashing key to each component of our new component tree. */
 
@@ -91,248 +343,311 @@ var SVGWrapper = /*#__PURE__*/function (_PureComponent) {
    * @returns {string} `camelCasedString`
    */
 
+  _createClass(SVGWrapper, [
+    {
+      key: "kebabToCamel",
+      value: function kebabToCamel(kebab) {
+        const temp =
+          kebab === null || kebab === void 0 ? void 0 : kebab.split("-");
+        let camel = "";
+        temp.forEach(function (val, inx) {
+          if (val !== null && val !== void 0 && val.trim()) {
+            if (inx > 0) {
+              camel += val[0].toUpperCase() + val.slice(1);
+            }
 
-  _createClass(SVGWrapper, [{
-    key: "kebabToCamel",
-    value: function kebabToCamel(kebab) {
-      var temp = kebab === null || kebab === void 0 ? void 0 : kebab.split("-");
-      var camel = "";
-      temp.forEach(function (val, inx) {
-        if (val !== null && val !== void 0 && val.trim()) {
-          if (inx > 0) {
-            camel += val[0].toUpperCase() + val.slice(1);
+            if (inx === 0) {
+              camel += val;
+            }
           }
-
-          if (inx === 0) {
-            camel += val;
-          }
-        }
-      });
-      return camel;
-    }
-    /** Converts an inline style string into an inline style object for react.
-     * @function
-     * @param {String} style - A style string.
-     * @example
-     * // returns {display:'flex', flexDirection:'row',backgroundColor:'#000'}
-     * transformStyleString("display:flex; flex-direction:row; background-color:#000");
-     */
-
-  }, {
-    key: "transformStyleString",
-    value: function transformStyleString() {
-      var _this2 = this;
-
-      var style = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-      var attrs = style.trim().split(";");
-      var styleAttrs = [];
-      attrs.forEach(function (attr) {
-        if (attr !== null && attr !== void 0 && attr.trim()) {
-          styleAttrs.push(attr.trim());
-        }
-      });
-      var transformedAttrs = {};
-      styleAttrs.forEach(function (attr) {
-        var _attr$split = attr.split(": "),
-            _attr$split2 = _slicedToArray(_attr$split, 2),
-            key = _attr$split2[0],
-            val = _attr$split2[1];
-
-        var actualKey = _this2.kebabToCamel(key);
-
-        var isValNumber = val === null || val === void 0 ? void 0 : val.match(isNumberRegex);
-        var actualVal = val;
-
-        if (isValNumber) {
-          actualVal = parseInt(actualVal, 10);
-        }
-
-        transformedAttrs[actualKey] = actualVal;
-      });
-      return transformedAttrs;
-    }
-    /** Returns an adjacency list of all the relevant nodes of the svg component tree wrt passed root node.
-     * @function
-     */
-
-  }, {
-    key: "computeSubTrees",
-    value: function computeSubTrees(rootNode) {
-      var _this3 = this;
-
-      var nodeName = rootNode === null || rootNode === void 0 ? void 0 : rootNode.nodeName;
-      var attributes = (rootNode === null || rootNode === void 0 ? void 0 : rootNode.attributes) || {};
-      var attributeNames = Object.keys(attributes);
-      var validAttributeNames = [];
-      var actualAttributes = {};
-      var actualChildNodes = [];
-      /** Retrieving all attributes for a particular tag */
-
-      attributeNames.forEach(function (eachAttributeName) {
-        if (parseInt(eachAttributeName) || eachAttributeName === "0") {
-          validAttributeNames.push(eachAttributeName);
-        }
-      });
-      /** - For each valid attribute and their value we create a object.
-       * - If attribute is a `style` we *properly* format and convert it into an object */
-
-      validAttributeNames.forEach(function (eachAttributeName) {
-        var eachAttributeNameExists = attributeNameMapping[attributes[eachAttributeName].nodeName];
-
-        if (eachAttributeNameExists) {
-          var attrValue = attributes[eachAttributeName].value;
-
-          if (eachAttributeNameExists === "style") {
-            attrValue = _this3.transformStyleString(attrValue);
-          }
-
-          actualAttributes[eachAttributeNameExists] = attrValue;
-        }
-      });
-      /** Finding relevant child nodes and pushing it into an array for further running of DFS. */
-
-      rootNode.childNodes.forEach(function (eachChild) {
-        var _eachChild$nodeValue;
-
-        /**  For ignoring dom objects been created beacuse of space or newline characters */
-        var nodeValue = eachChild === null || eachChild === void 0 ? void 0 : (_eachChild$nodeValue = eachChild.nodeValue) === null || _eachChild$nodeValue === void 0 ? void 0 : _eachChild$nodeValue.trim();
-
-        if (eachChild.nodeName === "#text" && nodeValue && eachChild.nodeName !== "#comment" || eachChild.nodeName !== "#text" && eachChild.nodeName !== "#comment") {
-          actualChildNodes.push(eachChild);
-        }
-      });
-      /** Providing a non-clashing key to each component of our new component tree. */
-
-      this.randomKey += 1;
-      /** Instantiating an object for each rootNode.
-       * @constant
-       */
-
-      var nodeObject = {
-        key: this.randomKey,
-        nodeName: nodeName,
-        attributes: actualAttributes,
-        childNodes: [],
-        nodeValue: rootNode === null || rootNode === void 0 ? void 0 : rootNode.nodeValue
-      };
-
-      if (actualChildNodes.length === 0) {
-        /**  Returns nodeObject is the `rootNode` is a leaf.*/
-        return nodeObject;
-      } else {
-        /**  For each non-leaf node recursively explore each child node and populate
-         * the `actualChildNodes` and finally return the adjacency list.*/
-        actualChildNodes.forEach(function (eachChild, inx) {
-          var currentChildNode = _objectSpread({}, _this3.computeSubTrees(eachChild));
-
-          actualChildNodes[inx] = _objectSpread({}, currentChildNode);
         });
-        nodeObject.childNodes = [].concat(actualChildNodes);
-        return nodeObject;
-      }
-    }
-    /** Parses the svg in top-down approach and constructs a react component for injection.
-     * @function
-     */
-
-  }, {
-    key: "performConversion",
-    value: function performConversion() {
-      var wrapperCompObject = this.state.wrapperCompObject;
-      var rootNodeIndex = -1;
-      /** Check if the file contains a valid parsable content or not. */
-
-      for (var inx = 0; inx < wrapperCompObject.childNodes.length; inx++) {
-        if (wrapperCompObject.childNodes[inx].nodeName !== "#comment") {
-          rootNodeIndex = inx;
-          break;
-        }
-      }
-      /** Adjacency list of all nodes of svg.
-       * @constant
+        return camel;
+      },
+      /** Converts an inline style string into an inline style object for react.
+       * @function
+       * @param {String} style - A style string.
+       * @example
+       * // returns {display:'flex', flexDirection:'row',backgroundColor:'#000'}
+       * transformStyleString("display:flex; flex-direction:row; background-color:#000");
        */
+    },
+    {
+      key: "transformStyleString",
+      value: function transformStyleString() {
+        const _this2 = this;
 
+        const style =
+          arguments.length > 0 && arguments[0] !== undefined
+            ? arguments[0]
+            : "";
+        const attrs = style.trim().split(";");
+        const styleAttrs = [];
+        attrs.forEach(function (attr) {
+          if (attr !== null && attr !== void 0 && attr.trim()) {
+            styleAttrs.push(attr.trim());
+          }
+        });
+        const transformedAttrs = {};
+        styleAttrs.forEach(function (attr) {
+          const _attr$split = attr.split(": ");
+          const _attr$split2 = _slicedToArray(_attr$split, 2);
+          const key = _attr$split2[0];
+          const val = _attr$split2[1];
 
-      var rootObject = this.computeSubTrees(wrapperCompObject.childNodes[0]);
-      this.setState({
-        domObject: rootObject,
-        RootComponent: rootNodeIndex !== -1 ? function (props) {
-          return getWrapperComponent(rootObject, props);
-        } : /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, "Invalid SVG File")
-      });
-    }
-    /** As the component mounts we, based on the props, trigger the `performConversion` function.
-     * @function
-     */
+          const actualKey = _this2.kebabToCamel(key);
 
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this4 = this;
+          const isValNumber =
+            val === null || val === void 0 ? void 0 : val.match(isNumberRegex);
+          let actualVal = val;
 
-      var _this$props = this.props,
-          src = _this$props.src,
-          type = _this$props.type;
-
-      if (type === "file") {
-        fetch(src).then(function (res) {
-          return res.text();
-        }).then(function (resText) {
-          var updatedCompWrapperObject = _objectSpread({}, _this4.state.wrapperCompObject);
-
-          if (resText.length > 0) {
-            updatedCompWrapperObject = new DOMParser().parseFromString(removeNewlineCharacters(resText), "application/xml");
+          if (isValNumber) {
+            actualVal = parseInt(actualVal, 10);
           }
 
-          _this4.setState({
-            fileData: resText,
-            wrapperCompObject: updatedCompWrapperObject
-          }, function () {
-            _this4.performConversion();
+          transformedAttrs[actualKey] = actualVal;
+        });
+        return transformedAttrs;
+      },
+      /** Returns an adjacency list of all the relevant nodes of the svg component tree wrt passed root node.
+       * @function
+       */
+    },
+    {
+      key: "computeSubTrees",
+      value: function computeSubTrees(rootNode) {
+        const _this3 = this;
+
+        const nodeName =
+          rootNode === null || rootNode === void 0 ? void 0 : rootNode.nodeName;
+        const attributes =
+          (rootNode === null || rootNode === void 0
+            ? void 0
+            : rootNode.attributes) || {};
+        const attributeNames = Object.keys(attributes);
+        const validAttributeNames = [];
+        const actualAttributes = {};
+        const actualChildNodes = [];
+        /** Retrieving all attributes for a particular tag */
+
+        attributeNames.forEach(function (eachAttributeName) {
+          if (parseInt(eachAttributeName) || eachAttributeName === "0") {
+            validAttributeNames.push(eachAttributeName);
+          }
+        });
+        /** - For each valid attribute and their value we create a object.
+         * - If attribute is a `style` we *properly* format and convert it into an object */
+
+        validAttributeNames.forEach(function (eachAttributeName) {
+          const eachAttributeNameExists =
+            attributeNameMapping[attributes[eachAttributeName].nodeName];
+
+          if (eachAttributeNameExists) {
+            let attrValue = attributes[eachAttributeName].value;
+
+            if (eachAttributeNameExists === "style") {
+              attrValue = _this3.transformStyleString(attrValue);
+            }
+
+            actualAttributes[eachAttributeNameExists] = attrValue;
+          }
+        });
+        /** Finding relevant child nodes and pushing it into an array for further running of DFS. */
+
+        rootNode.childNodes.forEach(function (eachChild) {
+          let _eachChild$nodeValue;
+
+          /**  For ignoring dom objects been created beacuse of space or newline characters */
+          const nodeValue =
+            eachChild === null || eachChild === void 0
+              ? void 0
+              : (_eachChild$nodeValue = eachChild.nodeValue) === null ||
+                _eachChild$nodeValue === void 0
+              ? void 0
+              : _eachChild$nodeValue.trim();
+
+          if (
+            (eachChild.nodeName === "#text" &&
+              nodeValue &&
+              eachChild.nodeName !== "#comment") ||
+            (eachChild.nodeName !== "#text" &&
+              eachChild.nodeName !== "#comment")
+          ) {
+            actualChildNodes.push(eachChild);
+          }
+        });
+        /** Providing a non-clashing key to each component of our new component tree. */
+
+        this.randomKey += 1;
+        /** Instantiating an object for each rootNode.
+         * @constant
+         */
+
+        const nodeObject = {
+          key: this.randomKey,
+          nodeName: nodeName,
+          attributes: actualAttributes,
+          childNodes: [],
+          nodeValue:
+            rootNode === null || rootNode === void 0
+              ? void 0
+              : rootNode.nodeValue,
+        };
+
+        if (actualChildNodes.length === 0) {
+          /**  Returns nodeObject is the `rootNode` is a leaf. */
+          return nodeObject;
+        } else {
+          /**  For each non-leaf node recursively explore each child node and populate
+           * the `actualChildNodes` and finally return the adjacency list. */
+          actualChildNodes.forEach(function (eachChild, inx) {
+            const currentChildNode = _objectSpread(
+              {},
+              _this3.computeSubTrees(eachChild)
+            );
+
+            actualChildNodes[inx] = _objectSpread({}, currentChildNode);
           });
-        });
-      } else if (type === "string") {
-        var updatedCompWrapperObject = new DOMParser().parseFromString(removeNewlineCharacters(src), "application/xml");
+          nodeObject.childNodes = [].concat(actualChildNodes);
+          return nodeObject;
+        }
+      },
+      /** Parses the svg in top-down approach and constructs a react component for injection.
+       * @function
+       */
+    },
+    {
+      key: "performConversion",
+      value: function performConversion() {
+        const wrapperCompObject = this.state.wrapperCompObject;
+        let rootNodeIndex = -1;
+        /** Check if the file contains a valid parsable content or not. */
+
+        for (let inx = 0; inx < wrapperCompObject.childNodes.length; inx++) {
+          if (wrapperCompObject.childNodes[inx].nodeName !== "#comment") {
+            rootNodeIndex = inx;
+            break;
+          }
+        }
+        /** Adjacency list of all nodes of svg.
+         * @constant
+         */
+
+        const rootObject = this.computeSubTrees(
+          wrapperCompObject.childNodes[0]
+        );
         this.setState({
-          fileData: src,
-          wrapperCompObject: updatedCompWrapperObject
-        }, function () {
-          _this4.performConversion();
+          domObject: rootObject,
+          RootComponent:
+            rootNodeIndex !== -1
+              ? function (props) {
+                  return getWrapperComponent(rootObject, props);
+                }
+              : /* #__PURE__ */ _react.default.createElement(
+                  _react.default.Fragment,
+                  null,
+                  "Invalid SVG File"
+                ),
         });
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$state = this.state,
-          RootComponent = _this$state.RootComponent,
-          domObject = _this$state.domObject;
-      /** Passing all props to root component instead of that src props. */
+      },
+      /** As the component mounts we, based on the props, trigger the `performConversion` function.
+       * @function
+       */
+    },
+    {
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        const _this4 = this;
 
-      var allProps = _objectSpread({}, this.props);
+        const _this$props = this.props;
+        const src = _this$props.src;
+        const type = _this$props.type;
 
-      delete allProps.src;
-      return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null, Object.values(domObject).length > 0 && /*#__PURE__*/_react["default"].createElement(RootComponent, allProps));
-    }
-  }]);
+        if (type === "file") {
+          fetch(src)
+            .then(function (res) {
+              return res.text();
+            })
+            .then(function (resText) {
+              let updatedCompWrapperObject = _objectSpread(
+                {},
+                _this4.state.wrapperCompObject
+              );
+
+              if (resText.length > 0) {
+                updatedCompWrapperObject = new DOMParser().parseFromString(
+                  removeNewlineCharacters(resText),
+                  "application/xml"
+                );
+              }
+
+              _this4.setState(
+                {
+                  fileData: resText,
+                  wrapperCompObject: updatedCompWrapperObject,
+                },
+                function () {
+                  _this4.performConversion();
+                }
+              );
+            });
+        } else if (type === "string") {
+          const updatedCompWrapperObject = new DOMParser().parseFromString(
+            removeNewlineCharacters(src),
+            "application/xml"
+          );
+          this.setState(
+            {
+              fileData: src,
+              wrapperCompObject: updatedCompWrapperObject,
+            },
+            function () {
+              _this4.performConversion();
+            }
+          );
+        }
+      },
+    },
+    {
+      key: "render",
+      value: function render() {
+        const _this$state = this.state;
+        const RootComponent = _this$state.RootComponent;
+        const domObject = _this$state.domObject;
+        /** Passing all props to root component instead of that src props. */
+
+        const allProps = _objectSpread({}, this.props);
+
+        delete allProps.src;
+        return /* #__PURE__ */ _react.default.createElement(
+          _react.default.Fragment,
+          null,
+          Object.values(domObject).length > 0 &&
+            /* #__PURE__ */ _react.default.createElement(
+              RootComponent,
+              allProps
+            )
+        );
+      },
+    },
+  ]);
 
   return SVGWrapper;
-}(_react.PureComponent);
+})(_react.PureComponent);
 
 SVGWrapper.defaultProps = {
-  type: "file"
+  type: "file",
 };
 SVGWrapper.propTypes = {
-  src: _propTypes["default"].string.isRequired,
-  type: _propTypes["default"].string
+  src: _propTypes.default.string.isRequired,
+  type: _propTypes.default.string,
 };
 /** Removes all new line, non-text chars from a string.
  * @function
  */
 
 function removeNewlineCharacters(inpString) {
-  var tempString = "";
-  var noSpaceList = inpString.split(/\r?\n|\r/g);
+  let tempString = "";
+  const noSpaceList = inpString.split(/\r?\n|\r/g);
   noSpaceList.forEach(function (element) {
     if (element.length > 0) {
       tempString += element.trim() + " ";
@@ -344,63 +659,84 @@ function removeNewlineCharacters(inpString) {
  * @function
  */
 
-
 function getWrapperComponent(rootNode, parentProps) {
-  var _rootNode$nodeValue;
+  let _rootNode$nodeValue;
 
-  var nodeAttributes = _objectSpread({}, rootNode.attributes);
+  const nodeAttributes = _objectSpread({}, rootNode.attributes);
 
-  var rootNodeValue = rootNode === null || rootNode === void 0 ? void 0 : (_rootNode$nodeValue = rootNode.nodeValue) === null || _rootNode$nodeValue === void 0 ? void 0 : _rootNode$nodeValue.trim();
-  var NodeName = rootNode.nodeName;
+  const rootNodeValue =
+    rootNode === null || rootNode === void 0
+      ? void 0
+      : (_rootNode$nodeValue = rootNode.nodeValue) === null ||
+        _rootNode$nodeValue === void 0
+      ? void 0
+      : _rootNode$nodeValue.trim();
+  const NodeName = rootNode.nodeName;
   /** If a node contains just a text, then enclose it with a fragment and retur. */
 
   if (NodeName === "#text") {
-    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, {
-      key: rootNode.key
-    }, rootNodeValue);
+    return /* #__PURE__ */ _react.default.createElement(
+      _react.default.Fragment,
+      {
+        key: rootNode.key,
+      },
+      rootNodeValue
+    );
   }
   /** We ignore comments */
 
-
   if (NodeName === "#comment") {
-    return /*#__PURE__*/_react["default"].createElement(_react["default"].Fragment, null);
+    return /* #__PURE__ */ _react.default.createElement(
+      _react.default.Fragment,
+      null
+    );
   }
   /** For each node, create a component from its nodeName and pass all its props.
    * @function
    */
 
-
-  var NodeComponent = function NodeComponent(props) {
-    return /*#__PURE__*/_react["default"].createElement(NodeName, props, props.children);
+  const NodeComponent = function NodeComponent(props) {
+    return /* #__PURE__ */ _react.default.createElement(
+      NodeName,
+      props,
+      props.children
+    );
   };
 
   if (rootNode.childNodes.length === 0) {
     /** For leaf nodes we return the component back to parent. */
-    return /*#__PURE__*/_react["default"].createElement(NodeComponent, _extends({}, nodeAttributes, {
-      key: rootNode.key
-    }));
+    return /* #__PURE__ */ _react.default.createElement(
+      NodeComponent,
+      _extends({}, nodeAttributes, {
+        key: rootNode.key,
+      })
+    );
   } else {
     /** For non-leaf nodes we recursively create the child components and
      * then attach them to their parent and then finally
      * return the root of the component tree */
-    var SiblingComponents = [];
+    const SiblingComponents = [];
     rootNode.childNodes.forEach(function (eachChild, inx) {
-      var EachChildComp = getWrapperComponent(eachChild, {});
+      const EachChildComp = getWrapperComponent(eachChild, {});
       SiblingComponents.push(EachChildComp);
     });
-    return /*#__PURE__*/_react["default"].createElement(NodeComponent, _extends({}, nodeAttributes, parentProps, {
-      key: rootNode.key
-    }), SiblingComponents);
+    return /* #__PURE__ */ _react.default.createElement(
+      NodeComponent,
+      _extends({}, nodeAttributes, parentProps, {
+        key: rootNode.key,
+      }),
+      SiblingComponents
+    );
   }
 }
 
-var _default = SVGWrapper;
+const _default = SVGWrapper;
 /** All valid html/svg attributes.
  *  @constant
  * @readonly
  */
 
-exports["default"] = _default;
+exports.default = _default;
 var attributeNameMapping = {
   // HTML
   accept: "accept",
@@ -426,7 +762,7 @@ var attributeNameMapping = {
   checked: "checked",
   children: "children",
   cite: "cite",
-  "class": "className",
+  class: "className",
   classid: "classID",
   classname: "className",
   cols: "cols",
@@ -441,7 +777,7 @@ var attributeNameMapping = {
   dangerouslysetinnerhtml: "dangerouslySetInnerHTML",
   data: "data",
   datetime: "dateTime",
-  "default": "default",
+  default: "default",
   defaultchecked: "defaultChecked",
   defaultvalue: "defaultValue",
   defer: "defer",
@@ -450,7 +786,7 @@ var attributeNameMapping = {
   download: "download",
   draggable: "draggable",
   enctype: "encType",
-  "for": "htmlFor",
+  for: "htmlFor",
   form: "form",
   formmethod: "formMethod",
   formaction: "formAction",
@@ -667,7 +1003,7 @@ var attributeNameMapping = {
   imagerendering: "imageRendering",
   "image-rendering": "imageRendering",
   in2: "in2",
-  "in": "in",
+  in: "in",
   inlist: "inlist",
   intercept: "intercept",
   k1: "k1",
@@ -807,7 +1143,7 @@ var attributeNameMapping = {
   "text-rendering": "textRendering",
   to: "to",
   transform: "transform",
-  "typeof": "typeof",
+  typeof: "typeof",
   u1: "u1",
   u2: "u2",
   underlineposition: "underlinePosition",
@@ -884,5 +1220,5 @@ var attributeNameMapping = {
   y: "y",
   ychannelselector: "yChannelSelector",
   z: "z",
-  zoomandpan: "zoomAndPan"
+  zoomandpan: "zoomAndPan",
 };
